@@ -1,58 +1,111 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PhotoVault — Discover & Collect Images</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="theme-color" content="#111310" />
+  <meta name="description" content="FrameFind — discover visual inspiration for your next idea." />
+  <title>FRAMEFIND — Find Your Visual</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="script.js" defer></script>
 </head>
 <body>
-  <header class="site-header">
-    <div class="header-inner">
-      <h1 class="app-title">PhotoVault</h1>
-      <p class="tagline">Curate your visual inspiration</p>
-    </div>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="#" aria-label="FrameFind home">
+        <span class="brand-mark">F<span>F</span></span>
+        <span>FRAMEFIND<span class="brand-dot">.</span></span>
+      </a>
 
-    <form id="search-form" class="search-form" role="search">
-      <div class="search-field">
-        <label for="search-input" class="visually-hidden">Search for images</label>
-        <input
-          id="search-input"
-          type="search"
-          placeholder="Search mountains, portraits, architecture…"
-          autocomplete="off"
-          required
-        />
+      <div class="header-note">
+        <span class="status-dot"></span>
+        YOUR NEXT IDEA STARTS HERE
       </div>
-      <button type="submit" id="search-btn" class="btn btn-primary">Search</button>
-      <button type="button" id="clear-btn" class="btn btn-ghost">Clear</button>
-    </form>
 
-    <div id="chips" class="chip-row" role="list" aria-label="Quick search suggestions">
-      <button type="button" class="chip" data-query="nature landscapes" role="listitem">Nature</button>
-      <button type="button" class="chip" data-query="city architecture" role="listitem">Architecture</button>
-      <button type="button" class="chip" data-query="wildlife animals" role="listitem">Wildlife</button>
-      <button type="button" class="chip" data-query="portrait photography" role="listitem">Portraits</button>
-      <button type="button" class="chip" data-query="minimal design" role="listitem">Minimal</button>
-    </div>
-  </header>
+      <a class="header-link" href="#discover">EXPLORE <span>↘</span></a>
+    </header>
 
-  <main>
-    <div id="status" class="status" aria-live="polite"></div>
+    <main>
+      <section class="hero" id="discover">
+        <div class="eyebrow">
+          <span class="eyebrow-line"></span>
+          THE VISUAL DISCOVERY SPACE
+        </div>
 
-    <section id="results" class="results-grid" aria-label="Image results">
-      <div id="empty-state" class="empty-state" aria-hidden="false">
-        <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-          <circle cx="8.5" cy="8.5" r="1.5"/>
-          <path d="M21 15l-5-5L5 17"/>
-        </svg>
-        <p class="empty-text">Search to see results</p>
-        <p class="empty-hint">Type a topic above or pick a suggestion chip</p>
-      </div>
-    </section>
-  </main>
+        <h1>
+          Find your<br />
+          next <span class="highlight">frame.</span>
+        </h1>
 
-  <script src="script.js"></script>
+        <p class="hero-description">
+          One idea can lead anywhere. Start with a word and discover
+          the visuals that bring your imagination to life.
+        </p>
+
+        <form class="search-form" id="search-form">
+          <label class="sr-only" for="search-input">Search for images</label>
+          <span class="search-icon" aria-hidden="true">⌕</span>
+          <input
+            id="search-input"
+            type="search"
+            placeholder="Try “cinematic streets”..."
+            autocomplete="off"
+          />
+          <button id="search-button" type="submit">
+            Search <span aria-hidden="true">↗</span>
+          </button>
+        </form>
+
+        <div class="popular-row">
+          <span class="popular-label">GET INSPIRED</span>
+          <button class="topic-chip" type="button">Nature</button>
+          <button class="topic-chip" type="button">Architecture</button>
+          <button class="topic-chip" type="button">Street</button>
+          <button class="topic-chip" type="button">Minimalism</button>
+        </div>
+      </section>
+
+      <section class="results-section" aria-labelledby="results-heading">
+        <div class="results-topline">
+          <div>
+            <p class="section-kicker">YOUR CANVAS</p>
+            <h2 id="results-heading">The discovery grid<span>.</span></h2>
+          </div>
+          <p id="result-count" class="result-count">YOUR SPACE AWAITS</p>
+        </div>
+
+        <div class="empty-state" id="empty-state">
+          <div class="empty-art" aria-hidden="true">
+            <span class="art-frame frame-one"></span>
+            <span class="art-frame frame-two"></span>
+            <span class="art-sun"></span>
+            <span class="art-mountain mountain-one"></span>
+            <span class="art-mountain mountain-two"></span>
+            <span class="art-star">✳</span>
+          </div>
+
+          <p class="empty-index">NO IMAGES / JUST POSSIBILITIES</p>
+          <h3>Your next inspiration<br />starts here.</h3>
+          <p class="empty-description">
+            Search for a feeling, a place, or an idea.
+            Your collection will take shape here.
+          </p>
+        </div>
+
+        <!-- Keep this container empty for Part 1. Part 2 will add image cards. -->
+        <div id="results" class="results-grid" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a class="brand footer-brand" href="#">
+        <span class="brand-mark">F<span>F</span></span>
+        <span>FRAMEFIND<span class="brand-dot">.</span></span>
+      </a>
+      <p>MADE FOR THE CURIOUS.</p>
+      <p class="footer-version">CONCEPT / 001</p>
+    </footer>
+  </div>
 </body>
 </html>

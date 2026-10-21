@@ -182,14 +182,13 @@ async function searchImages(query, append = false) {
     const pages = Object.values(data.query?.pages || {});
 
     const images = pages
-  .map(page => ({
-    title: page.title,
-    ...page.imageinfo?.[0]
-  }))
-  .filter(image => image.url);
-
-console.log("API response:", data);
-console.log("Images found:", images);
+      .map(page => ({
+        title: page.title,
+        ...page.imageinfo?.[0]
+        }))
+      .filter(image => image.url);
+    console.log("API response:", data);
+    console.log("Images found:", images);
 
     continuation = data.continue || null;
 

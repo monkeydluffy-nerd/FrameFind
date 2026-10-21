@@ -1,0 +1,236 @@
+/* =========================================
+   PhotoVault — Custom Properties & Reset
+   ========================================= */
+:root {
+  /* Teal / Amber palette — distinctly not PixelPulse purple */
+  --color-bg: #f5f9fa;
+  --color-surface: #ffffff;
+  --color-surface-hover: #eef5f7;
+  --color-primary: #0d9488;        /* teal-600 */
+  --color-primary-hover: #0f766e;  /* teal-700 */
+  --color-primary-light: #ccfbf1;  /* teal-100 */
+  --color-accent: #f59e0b;         /* amber-500 */
+  --color-accent-hover: #d97706;   /* amber-600 */
+  --color-text: #1e293b;           /* slate-800 */
+  --color-text-muted: #64748b;     /* slate-500 */
+  --color-border: #e2e8f0;         /* slate-200 */
+  --color-focus: #0d9488;
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 10px 28px rgba(15, 23, 42, 0.12);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --transition: 180ms ease;
+  --header-h: auto;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+body {
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+img, picture, video, canvas, svg { display: block; max-width: 100%; }
+input, button, textarea, select { font: inherit; }
+a { color: var(--color-primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+/* =========================================
+   Header — Sticky, distinct card layout
+   ========================================= */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  padding: clamp(1rem, 2vw, 1.5rem) clamp(1rem, 4vw, 2rem);
+}
+
+.header-inner { max-width: 1100px; margin: 0 auto; }
+
+.app-title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+  color: var(--color-primary);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.15rem;
+}
+.tagline { color: var(--color-text-muted); font-size: 0.95rem; }
+
+/* --- Search Form Row --- */
+.search-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+  margin-top: 1rem;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.search-field { flex: 1; min-width: 220px; }
+
+#search-input {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: 1rem;
+  transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+}
+#search-input::placeholder { color: var(--color-text-muted); opacity: 0.7; }
+#search-input:hover { border-color: #cbd5e1; }
+#search-input:focus {
+  outline: none;
+  border-color: var(--color-focus);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+  background: var(--color-surface);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.7rem 1.2rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+.btn:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--color-primary-light); }
+
+.btn-primary {
+  background: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
+}
+.btn-primary:hover { background: var(--color-primary-hover); border-color: var(--color-primary-hover); }
+.btn-primary:active { transform: scale(0.98); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+.btn-ghost:hover { background: var(--color-surface-hover); border-color: #cbd5e1; color: var(--color-primary); }
+
+/* --- Chip Row --- */
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--color-border);
+}
+.chip {
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  border: 1px solid transparent;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.chip:hover { background: var(--color-primary); color: #fff; transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+.chip:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--color-primary-light); }
+
+/* =========================================
+   Main & Status
+   ========================================= */
+main { max-width: 1100px; margin: 0 auto; padding: clamp(1rem, 2.5vw, 1.5rem) clamp(1rem, 4vw, 2rem); width: 100%; }
+
+.status {
+  min-height: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.status.loading { color: var(--color-primary); }
+.status.error { color: #dc2626; }
+.status.success { color: #16a34a; }
+
+/* =========================================
+   Results Grid — Responsive CSS Grid
+   ========================================= */
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.25rem;
+  min-height: 300px; /* ensures grid area visible when empty */
+}
+
+/* Empty state — centered in grid */
+.empty-state {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  transition: opacity 250ms ease, visibility 250ms ease;
+}
+.empty-state.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+.empty-icon { width: 56px; height: 56px; color: var(--color-border); margin-bottom: 0.75rem; }
+.empty-text { font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin-bottom: 0.25rem; }
+.empty-hint { font-size: 0.9rem; }
+
+/* Future image cards (Part 2) — placeholder styles */
+.image-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.image-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.image-card img { width: 100%; height: 180px; object-fit: cover; background: var(--color-bg); }
+.image-card .card-body { padding: 0.85rem; display: flex; flex-direction: column; gap: 0.4rem; }
+.image-card .card-title { font-weight: 600; font-size: 0.95rem; color: var(--color-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.image-card .card-meta { font-size: 0.8rem; color: var(--color-text-muted); }
+
+/* =========================================
+   Responsive Tweaks
+   ========================================= */
+@media (max-width: 560px) {
+  .search-form { flex-direction: column; align-items: stretch; }
+  .btn { width: 100%; }
+  .chip-row { justify-content: center; }
+  .results-grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}

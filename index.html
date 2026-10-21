@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PhotoVault — Discover & Collect Images</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <h1 class="app-title">PhotoVault</h1>
+      <p class="tagline">Curate your visual inspiration</p>
+    </div>
+
+    <form id="search-form" class="search-form" role="search">
+      <div class="search-field">
+        <label for="search-input" class="visually-hidden">Search for images</label>
+        <input
+          id="search-input"
+          type="search"
+          placeholder="Search mountains, portraits, architecture…"
+          autocomplete="off"
+          required
+        />
+      </div>
+      <button type="submit" id="search-btn" class="btn btn-primary">Search</button>
+      <button type="button" id="clear-btn" class="btn btn-ghost">Clear</button>
+    </form>
+
+    <div id="chips" class="chip-row" role="list" aria-label="Quick search suggestions">
+      <button type="button" class="chip" data-query="nature landscapes" role="listitem">Nature</button>
+      <button type="button" class="chip" data-query="city architecture" role="listitem">Architecture</button>
+      <button type="button" class="chip" data-query="wildlife animals" role="listitem">Wildlife</button>
+      <button type="button" class="chip" data-query="portrait photography" role="listitem">Portraits</button>
+      <button type="button" class="chip" data-query="minimal design" role="listitem">Minimal</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="status" class="status" aria-live="polite"></div>
+
+    <section id="results" class="results-grid" aria-label="Image results">
+      <div id="empty-state" class="empty-state" aria-hidden="false">
+        <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/>
+          <path d="M21 15l-5-5L5 17"/>
+        </svg>
+        <p class="empty-text">Search to see results</p>
+        <p class="empty-hint">Type a topic above or pick a suggestion chip</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

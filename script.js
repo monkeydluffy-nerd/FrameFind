@@ -4,11 +4,42 @@ const searchInput = document.getElementById("search-input");
 const topicChips = document.querySelectorAll(".topic-chip");
 const results = document.querySelector("#results.results-grid");
 const resultCount = document.getElementById("result-count");
+const emptyIndex = emptyState.querySelector(".empty-index");
+const emptyHeading = emptyState.querySelector("h3");
+const emptyDescription = emptyState.querySelector(".empty-description");
+const initialEmptyState = {
+  index: emptyIndex.textContent,
+  heading: emptyHeading.innerHTML,
+  description: emptyDescription.textContent,
+};
+
+function setEmptyState(index, heading, description) {
+  emptyIndex.textContent = index;
+  emptyHeading.textContent = heading;
+  emptyDescription.textContent = description;
+}
+
+function resetEmptyState() {
+  emptyIndex.textContent = initialEmptyState.index;
+  emptyHeading.innerHTML = initialEmptyState.heading;
+  emptyDescription.textContent = initialEmptyState.description;
+}
 
 async function searchImages(query) {
   const trimmedQuery = query.trim();
 
-  if (!trimmedQuery) return;
+  if (!trimmedQuery) {
+    results.innerHTML = "";
+    emptyState.hidden = false;
+    resetEmptyState();
+    resultCount.textContent = "Enter a search term to find images.";
+    return;
+  }
+
+  results.innerHTML = "";
+  emptyState.hidden = true;
+  resultCount.textContent = `Searching for "${trimmedQuery}"...`;
+  results.setAttribute("aria-busy", "true");
 
   const url =
     "https://commons.wikimedia.org/w/api.php?action=query" +
@@ -31,8 +62,6 @@ async function searchImages(query) {
 
     const data = await response.json();
     const items = Object.values(data.query?.pages || {});
-
-    results.innerHTML = "";
 
     items.forEach((item) => {
       const imageInfo = item.imageinfo?.[0];
@@ -59,15 +88,29 @@ async function searchImages(query) {
     const renderedCount = results.querySelectorAll(".image-card").length;
     emptyState.hidden = renderedCount > 0;
 
-    if (resultCount) {
+    if (renderedCount === 0) {
+      setEmptyState(
+        "NO IMAGES FOUND",
+        "No frames found.",
+        "Try a different search to discover more images."
+      );
+      resultCount.textContent = `No images found for "${trimmedQuery}".`;
+    } else {
       resultCount.textContent =
         `Showing ${renderedCount} results for "${trimmedQuery}"`;
     }
   } catch (error) {
     console.error("Image search failed:", error);
-    if (resultCount) {
-      resultCount.textContent = "Unable to fetch images. Please try again.";
-    }
+    results.innerHTML = "";
+    emptyState.hidden = false;
+    setEmptyState(
+      "SOMETHING WENT WRONG",
+      "We couldn't load images.",
+      "Please check your connection and try again."
+    );
+    resultCount.textContent = "Unable to fetch images. Please try again.";
+  } finally {
+    results.setAttribute("aria-busy", "false");
   }
 }
 
